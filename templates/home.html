@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="buliyaa">
+
+    <title>Sethji</title>
+    <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon"
+    <!-- Bootstrap core CSS -->
+    <link href="/media/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+      var start = 1;
+
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="">Customised google search for Sethji</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+
+      <div class="input-group">
+        <label for="country">Country :</label>
+        <select class="form-control" name="country" id="country">
+          <option value="">------</option>
+          <option value="in">India</option>
+          <option value="cn">China</option>
+          <option value="cn">Korea</option>
+          <option value="cn">Mongolia</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="numPages">Number of Pages :</label>
+        <input class="form-control" type="text" name="numPages" id="numPages">        
+      </div>
+      <br>
+      <div class="input-group">
+        <input type="text" class="form-control" name="word" id="word" placeholder="Search">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit" id="button" onclick="getAllTheData()">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+      </div>
+      <!-- <table id="table" class="table"> -->
+        <button class="btn btn-default" type="submit" onclick="getAll()" id="getInner" style="visibility:hidden">
+          Get Inner Content of all the pages<i class="glyphicon glyphicon-search"></i>
+        </button>
+        <table class="table table-striped table-hover table-bordered" id="data">
+        </table>
+        <button class="btn btn-default" type="submit" id="extra" id="getMoreResult" style="visibility:hidden">
+          Get More Results <i class="glyphicon glyphicon-search"></i>
+        </button>
+    </div> <!-- /container -->
+
+
+    <script type="text/javascript" src="/media/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/media/js/bootstrap.min.js"></script>
+    <script>
+      function loadThisText(id, link){
+          $.get(link, function(data, status){
+             $("#"+id).html(data);
+          });
+      }
+      // $("#button").click(function(){
+      //     var word = $("#word").val();
+      //     var country = $("#country").val();
+      //     start = 1;
+      //     $("tbody").empty();
+      //     var  heading = '<div class="row">  <div class="col-md-3">Title</div>  <div class="col-md-3">Link</div>  <div class="col-md-3">Snippet</div>  <div class="col-md-3">Get Content</div></div>';
+
+      //     $("#data").append(heading);
+      //     $.get("getData?word="+word+"&country="+country+"&start="+start, function(data, status){
+      //       $("#data").append(data);
+      //       start = start + 10;     
+      //     });
+      // });
+      $("#extra").click(function(){
+          var word = $("#word").val();
+          var country = $("#country").val();
+          $.get("getData?word="+word+"&country="+country+"&start="+start, function(data, status){
+            $("#innerdata").append(data);
+            start = start + 10;     
+          });
+
+      });
+        function func(id,link){
+        document.getElementById(id).innerHTML='<iframe width="1000" height="800" src="'+link+'">'; }
+      function loadText(id, link){
+          $.get("getText?link="+link, function(data, status){
+            $("#"+id).html(data);
+          });
+      }  
+      function getAll(){
+        for(var i=1;i<start;i++){
+          var link = $("#link-"+i.toString()).attr("href");
+          loadText("id-"+i.toString(),link)
+        }
+      }
+      function getAllTheData(){
+          var word = $("#word").val();
+          var country = $("#country").val();
+          var numPages = parseInt($("#numPages").val());
+          start = 1;
+          $("#data").empty();
+          var  heading = '<thead><tr class="row">  <th class="col-md-3">Title</th>  <th class="col-md-3">Link</th>  <th class="col-md-3">Snippet</th>  <th class="col-md-3">Get Content</th></tr><thead><tbody id="innerdata"></tbody>';
+          $("#getInner").show();
+          $("#getMoreResult").show();
+          $("#data").append(heading);
+          for(var i=0;i<numPages;i++){
+            $.get("getData?word="+word+"&country="+country+"&start="+start, function(data, status){
+              $("#innerdata").append(data);
+            });        
+            start = start + 10;     
+          }
+      }
+    </script>
+  </body>
+</html>

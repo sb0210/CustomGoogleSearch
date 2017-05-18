@@ -1,0 +1,11 @@
+{% for result in results %}
+<tr class="row">
+  <td class="col-md-3">{{result.title}}</td>
+  <td class="col-md-3"><a id="link-{{result.id}}" href="{{result.link}}">{{result.link}}</a></td>
+  <td class="col-md-3">{{result.snippet}}</td>
+  <td class="col-md-3"><button class="btn btn-default" onClick="loadText	('id-{{result.id}}','{{result.link}}')">Get Text From Page</button></td>
+</tr>
+<tr class="row">
+  <td class="col-md-12" id="id-{{result.id}}" colspan="4"></td>
+</tr>
+{% endfor %}
