@@ -91,7 +91,7 @@
       //     var  heading = '<div class="row">  <div class="col-md-3">Title</div>  <div class="col-md-3">Link</div>  <div class="col-md-3">Snippet</div>  <div class="col-md-3">Get Content</div></div>';
 
       //     $("#data").append(heading);
-      //     $.get("getData?word="+word+"&country="+country+"&start="+start, function(data, status){
+      //     $.get("shreya/getData?word="+word+"&country="+country+"&start="+start, function(data, status){
       //       $("#data").append(data);
       //       start = start + 10;     
       //     });
@@ -99,7 +99,7 @@
       $("#extra").click(function(){
           var word = $("#word").val();
           var country = $("#country").val();
-          $.get("getData?word="+word+"&country="+country+"&start="+start, function(data, status){
+          $.get("shreya/getData?word="+word+"&country="+country+"&start="+start, function(data, status){
             $("#innerdata").append(data);
             start = start + 10;     
           });
@@ -108,7 +108,7 @@
         function func(id,link){
         document.getElementById(id).innerHTML='<iframe width="1000" height="800" src="'+link+'">'; }
       function loadText(id, link){
-          $.get("getText?link="+link, function(data, status){
+          $.get("shreya/getText?link="+link, function(data, status){
             $("#"+id).html(data);
           });
       }  
@@ -129,7 +129,7 @@
           $("#getMoreResult").show();
           $("#data").append(heading);
           for(var i=0;i<numPages;i++){
-            $.get("getData?word="+word+"&country="+country+"&start="+start, function(data, status){
+            $.get("shreya/getData?word="+word+"&country="+country+"&start="+start, function(data, status){
               $("#innerdata").append(data);
             });        
             start = start + 10;     
