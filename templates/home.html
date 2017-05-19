@@ -64,12 +64,10 @@
         </div>
       </div>
       <!-- <table id="table" class="table"> -->
-        <button class="btn btn-default" type="submit" onclick="getAll()" id="getInner" style="visibility:hidden">
-          Get Inner Content of all the pages<i class="glyphicon glyphicon-search"></i>
-        </button>
+
         <table class="table table-striped table-hover table-bordered" id="data">
         </table>
-        <button class="btn btn-default" type="submit" id="extra" id="getMoreResult" style="visibility:hidden">
+        <button class="btn btn-default" type="submit" id="extra"  style="visibility:hidden">
           Get More Results <i class="glyphicon glyphicon-search"></i>
         </button>
     </div> <!-- /container -->
@@ -83,19 +81,7 @@
              $("#"+id).html(data);
           });
       }
-      // $("#button").click(function(){
-      //     var word = $("#word").val();
-      //     var country = $("#country").val();
-      //     start = 1;
-      //     $("tbody").empty();
-      //     var  heading = '<div class="row">  <div class="col-md-3">Title</div>  <div class="col-md-3">Link</div>  <div class="col-md-3">Snippet</div>  <div class="col-md-3">Get Content</div></div>';
 
-      //     $("#data").append(heading);
-      //     $.get("shreya/getData?word="+word+"&country="+country+"&start="+start, function(data, status){
-      //       $("#data").append(data);
-      //       start = start + 10;     
-      //     });
-      // });
       $("#extra").click(function(){
           var word = $("#word").val();
           var country = $("#country").val();
@@ -124,9 +110,8 @@
           var numPages = parseInt($("#numPages").val());
           start = 1;
           $("#data").empty();
-          var  heading = '<thead><tr class="row">  <th class="col-md-3">Title</th>  <th class="col-md-3">Link</th>  <th class="col-md-3">Snippet</th>  <th class="col-md-3">Get Content</th></tr><thead><tbody id="innerdata"></tbody>';
-          $("#getInner").show();
-          $("#getMoreResult").show();
+          var  heading = '<thead><tr class="row">  <th class="col-md-3">Title</th>  <th class="col-md-3">Link</th>  <th class="col-md-3">Snippet</th>  <th class="col-md-3">        <button class="btn btn-default" type="submit" onclick="getAll()" id="getInner">          Get Inner Content of all the pages       </button></th></tr><thead><tbody id="innerdata"></tbody>';
+          $("#extra").css("visibility","visible");
           $("#data").append(heading);
           for(var i=0;i<numPages;i++){
             $.get("shreya/getData?word="+word+"&country="+country+"&start="+start, function(data, status){
