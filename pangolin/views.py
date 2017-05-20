@@ -23,7 +23,7 @@ def home(request):
 	ip = request.META.get('REMOTE_ADDR')
 	date = datetime.datetime.now()
 	file = open("logs.txt",'a')
-	file.write(str(ip) + " " + str(date)+"\n")
+	file.write(str(date)+"\n")
 	file.close()
 	return render(request,'home.html')
 
