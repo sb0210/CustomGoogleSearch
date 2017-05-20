@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from pangolin.views import home, getData, getText
+from pangolin.views import home, getData, getText, logs
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^shreya$',home),
     url(r'^shreya/getData$',getData),
     url(r'^shreya/getText$',getText),
+    url(r'^shreya/logs$',logs),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

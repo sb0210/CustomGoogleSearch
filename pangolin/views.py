@@ -5,10 +5,13 @@ from googleapiclient.discovery import build
 from bs4 import BeautifulSoup
 import requests
 from django.http import HttpResponse
+import datetime
 
 
 my_api_key = "AIzaSyDWoW06UEOvs012lZM7-1SWrOow-2f7yr4"
 my_cse_id = "005819025646842418275:zlurprlbaaa"
+
+
 
 def google_search(search_term, api_key, cse_id, **kwargs):
     service = build("customsearch", "v1", developerKey=api_key)
@@ -17,8 +20,18 @@ def google_search(search_term, api_key, cse_id, **kwargs):
 
 
 def home(request):
+	ip = request.META.get('REMOTE_ADDR')
+	date = datetime.datetime.now()
+	file = open("logs.txt",'a')
+	file.write(str(ip) + " " + str(date)+"\n")
+	file.close()
 	return render(request,'home.html')
 
+def logs(request):
+	file = open("logs.txt",'r')
+	data = file.read().replace("\n","<br>")
+	file.close()
+	return HttpResponse(data)
 
 def getData(request):
 	start = request.GET.get("start")
