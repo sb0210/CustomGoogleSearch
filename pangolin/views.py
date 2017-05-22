@@ -21,17 +21,15 @@ def google_search(search_term, api_key, cse_id, **kwargs):
 
 def home(request):
 	ip = request.META.get('REMOTE_ADDR')
-	date = datetime.datetime.now()
-	file = open("logs.txt",'a')
-	file.write(str(date)+"\n")
-	file.close()
-	return render(request,'home.html')
-
-def logs(request):
 	file = open("logs.txt",'r')
-	data = file.read().replace("\n","<br>")
+	data = file.read()
+	count = int(data)
+	count = count + 1
+	file = open("logs.txt","w")
+	file.write(str(count))
 	file.close()
-	return HttpResponse(data)
+	return render(request,'home.html',{"hits":count})
+
 
 def getData(request):
 	start = request.GET.get("start")
