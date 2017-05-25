@@ -20,15 +20,7 @@ def google_search(search_term, api_key, cse_id, **kwargs):
 
 
 def home(request):
-	ip = request.META.get('REMOTE_ADDR')
-	file = open("logs.txt",'r')
-	data = file.read()
-	count = int(data)
-	count = count + 1
-	file = open("logs.txt","w")
-	file.write(str(count))
-	file.close()
-	return render(request,'home.html',{"hits":count})
+	return render(request,'home.html',{"hits":"Does not matter :)"})
 
 
 def getData(request):
